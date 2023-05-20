@@ -30,6 +30,15 @@ async function run() {
 
 
 
+    app.get('/allCarToys', async(req, res ) => {
+        let query = {};
+        if(req.query?.sellerEmail){
+            query = {sellerEmail: req.query.sellerEmail}
+        }
+        const result = await toyPlanetCollection.find(query).toArray();
+        res.send(result)
+    })
+
     app.post('/allCarToys', async(req, res) => {
         const newToys = req.body;
         const result = await toyPlanetCollection.insertOne(newToys)
