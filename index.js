@@ -39,6 +39,13 @@ async function run() {
         res.send(result)
     })
 
+   app.get('/allCarToys/:id', async(req,res) => {
+    const id = req.params.id;
+    const query = { _id: new ObjectId(id)}
+    const result = await toyPlanetCollection.findOne(query)
+    res.send(result)
+   }) 
+
     app.post('/allCarToys', async(req, res) => {
         const newToys = req.body;
         const result = await toyPlanetCollection.insertOne(newToys)
